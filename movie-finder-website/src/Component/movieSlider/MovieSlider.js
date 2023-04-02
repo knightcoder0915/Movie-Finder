@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import './movieSlider.css'
+import './movieslider.css'
 import BtnSlider from './BtnSlider'
 import dataSlider from './dataSlide'
 import BtnWatchlist from './BtnWatchlist'
