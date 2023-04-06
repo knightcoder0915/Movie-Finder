@@ -2,30 +2,33 @@ import React, { useEffect, useState } from "react"
 import './movieSlider.css'
 import BtnSlider from './BtnSlider'
 import BtnWatchlist from './BtnWatchlist'
+import CinemaService from "../services/apiCinema"
 
 export default function MovieSlider(props) {
 
-    const [dataSlide, setUsers] = useState([])
-    const [slideIndex, setSlideIndex] = useState(1)
+    
   
-    const fetchData = async () => {
-      const response = await fetch("https://api.kinopoisk.dev/v1/movie?sortField=rating.kp&page=1&type=movie&year=2019-2023",{
-            method: 'GET',
-            headers: {
-                'X-API-KEY': 'WR1E3SY-XJD4YEZ-Q5H5BYP-75Q2J6H',
-                'Content-Type': 'application/json'
-            }
-        })
-    .then(item => item.json())
-      const dataSlide = await response.docs
-      setUsers(dataSlide)
-    }
   
-    useEffect(() => {
-      fetchData()
-    }, [])
-   
+    const getService = new CinemaService()
 
+    const [dataSlide, setDataSl] = useState([])
+    const [slideIndex, setSlideIndex] = useState(1)
+
+    const fillArr = () => {
+      function filterByUrl(item) {
+        if (item.primaryImage !== null) {
+          return true
+        }
+      }
+      getService.getMoviesForSlider()
+        .then(item => {
+          const dataSlide = item.results
+          const newDataSlide = dataSlide.filter(filterByUrl)
+          setDataSl(newDataSlide)     
+          })
+    }
+    fillArr()
+   
     const nextSlide = () => {
       if(slideIndex !== dataSlide.length){
         setSlideIndex(slideIndex + 1)
@@ -54,9 +57,9 @@ export default function MovieSlider(props) {
                     className={slideIndex === index + 1? "slide active-anim": "slide"}>
                         <img
                         alt={obj.id}
-                        src={obj.poster.url}
+                        src={obj.primaryImage.url}
                         />
-                        <div className="filmName">{obj.name}</div>
+                        <div className="filmName">{obj.titleText.text}</div>
                     </div>
                 )
             })}
