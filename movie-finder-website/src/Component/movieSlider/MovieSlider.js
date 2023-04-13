@@ -1,34 +1,21 @@
-import React, { useEffect, useState } from "react"
+import React, { useState,useEffect } from "react"
 import './movieSlider.css'
 import BtnSlider from './BtnSlider'
 import BtnWatchlist from './BtnWatchlist'
-import CinemaService from "../services/apiCinema"
+import DBSlides from "./sliderDB"
 
 export default function MovieSlider(props) {
 
-    
-  
-  
-    const getService = new CinemaService()
 
     const [dataSlide, setDataSl] = useState([])
     const [slideIndex, setSlideIndex] = useState(1)
 
-    const fillArr = () => {
-      function filterByUrl(item) {
-        if (item.primaryImage !== null) {
-          return true
-        }
-      }
-      getService.getMoviesForSlider()
-        .then(item => {
-          const dataSlide = item.results
-          const newDataSlide = dataSlide.filter(filterByUrl)
-          setDataSl(newDataSlide)     
-          })
-    }
-    fillArr()
+
    
+    useEffect(() => {
+      setDataSl(DBSlides);
+    }, []);
+  
     const nextSlide = () => {
       if(slideIndex !== dataSlide.length){
         setSlideIndex(slideIndex + 1)
@@ -53,13 +40,13 @@ export default function MovieSlider(props) {
           {dataSlide.map((obj, index)=> {
               return (
                     <div
-                    key={obj.id}
+                    key={obj.imdbID}
                     className={slideIndex === index + 1? "slide active-anim": "slide"}>
                         <img
-                        alt={obj.id}
-                        src={obj.primaryImage.url}
+                        alt={obj.imdbID}
+                        src={obj.Poster}
                         />
-                        <div className="filmName">{obj.titleText.text}</div>
+                        <div className="filmName">{obj.Title}</div>
                     </div>
                 )
             })}
@@ -71,7 +58,6 @@ export default function MovieSlider(props) {
               <div
               className={slideIndex === index + 1? "dot active": "dot"}
               onClick={() => moveDot(index + 1)}>
-
               </div>
             ))}
           </div>

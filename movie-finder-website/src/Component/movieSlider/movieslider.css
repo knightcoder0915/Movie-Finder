@@ -1,6 +1,6 @@
 .container-slider {
-    width: 800px;
-    min-height: 350px;
+    width: 700px;
+    height: 400px;
     margin: 100px auto 0;
     position: relative;
     overflow: hidden;
@@ -19,10 +19,10 @@
     transition: opacity ease-in-out 0.4s;
   }
   .slide img {
-    width: 800px;
-    height: 350px; 
+    width: 100%;
+    height: 100%; 
     object-fit: cover;
-    object-position: top top;
+    object-position: 0 0;
   }
   .active-anim {
     opacity: 1;
