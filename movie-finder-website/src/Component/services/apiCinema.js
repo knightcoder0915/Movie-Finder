@@ -22,8 +22,8 @@ export default class CinemaService {
         return await res.json()
     }
 
-    getMoviesForSlider(){
-        return this.getResource('/titles?list=top_rated_series_250&startYear=2010&limit=10')
+    getMovies(){
+        return this.getResource('/titles?list=most_pop_movies&limit=20&endYear=2023&startYear=2015')
     }
 
 }

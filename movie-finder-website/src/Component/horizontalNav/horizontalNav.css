@@ -1,0 +1,21 @@
+.navContainer {
+    width: 700px;
+    display: flex;
+    justify-content: space-around;
+    margin: 0 auto;
+}
+.active {
+    color: #00B9AE;
+    text-decoration: underline;
+}
+.navLink {
+    font-family: Lato;
+    font-size: 24px;
+    font-weight: 600;
+    color: #F9F9F9;
+    text-decoration: none;
+}
+
+.navLink a:hover{
+    text-decoration: underline;
+}
