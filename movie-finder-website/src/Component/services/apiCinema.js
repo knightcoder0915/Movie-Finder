@@ -23,8 +23,11 @@ export default class CinemaService {
     }
 
     getMovies(){
-        return this.getResource('/titles?list=most_pop_movies&limit=20&endYear=2023&startYear=2015')
+        return this.getResource('/titles?list=most_pop_movies&limit=10&endYear=2023&startYear=2015')
     }
 
+    getSeries() {
+        return this.getResource('/titles?list=top_rated_series_250&limit=10&page=2&endYear=2023&startYear=2010')
+    }
 }
 

@@ -1,43 +1,42 @@
 import React,{useState,useEffect} from 'react';
 import CinemaService from '../services/apiCinema';
 import plus from '../MovieSlider/icons/plus.svg'
-import './moviesPage.css'
+import './pages.css'
 
 
-const MoviesPage = () => {
+const SeriesPage = () => {
 
-  const [dataMovies, setDataMovies] = useState([])
+  const [dataSeries, setDataSeries] = useState([])
 
   useEffect(() => {
         
-      const getDataMovies = new CinemaService()
+      const getDataSeries = new CinemaService()
       function filterByUrl(item) {
           if (item.primaryImage !== null && (item.primaryImage.width < item.primaryImage.height)) {
             return true
           }
         }
-      getDataMovies.getMovies()
+      getDataSeries.getSeries()
         .then(item => {
           const data = item.results
-          const finalDataMovies = data.filter(filterByUrl)
-          console.log(finalDataMovies)
-          setDataMovies(finalDataMovies)
+          const finalDataSeries = data.filter(filterByUrl)
+          setDataSeries(finalDataSeries)
         })
   
   }, []);
 
     return(
         <div className='wrapper'>
-          <h2>Popular Movies</h2>
-          <div className='moviesWrapper'>
-              {dataMovies.map((obj,index) => {
+          <h2>Popular Series</h2>
+          <div className='cardWrapper'>
+              {dataSeries.map((obj,index) => {
               return(
-                <div className='movieCard' key={obj.id}>
+                <div className='card' key={obj.id}>
                 <img
                 alt={index}
                 src={obj.primaryImage.url}>
                 </img>
-                <div className='titleMovie'>{obj.titleText.text}</div>
+                <div className='titleCard'>{obj.titleText.text}</div>
                 <div className='btn-onCard'
                 onClick={(item) => {
                   console.log(obj.id)
@@ -59,4 +58,7 @@ const MoviesPage = () => {
         </div>
     )
 }
-export default MoviesPage
+
+export {
+    SeriesPage
+}

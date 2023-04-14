@@ -1,22 +1,22 @@
-.movieCard {
+.card {
     width: 237px;
     height: 400px;
     margin-top: 20px;
     position: relative;
 }
-.movieCard:hover{
+.card:hover{
     transform: scale(1.1);
     transition: 1s;
     cursor: pointer;
 }
-.movieCard img {
+.card img {
     width: 100%;
     height: 100%; 
     object-fit: cover;
     object-position: center center;
     border-radius: 20px;
 }
-.moviesWrapper {
+.cardWrapper {
     display: flex;
     flex-wrap: wrap;
     width: 770px;  
@@ -36,7 +36,7 @@ h2{
     width: 770px;
 
 }
-.titleMovie{
+.titleCard{
     font-family: Lato;
     font-size: 24px;
     font-weight: 800;
